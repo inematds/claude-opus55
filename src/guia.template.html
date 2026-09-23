@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<!-- GERADO por scripts/build.py a partir de src/guia.template.html + i18n/<idioma>.json. Não edite o HTML gerado. -->
+<html lang="{{HTMLLANG}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{t:meta_title}}</title>
+<meta name="description" content="{{t:meta_desc}}">
+<meta property="og:title" content="{{t:meta_title}}">
+<meta property="og:description" content="{{t:meta_desc}}">
+<meta property="og:image" content="https://inematds.github.io/claude-opus55/capa/capa.png">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/claude-opus55/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/claude-opus55/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/claude-opus55/guia/es/">
+<link rel="alternate" hreflang="x-default" href="https://inematds.github.io/claude-opus55/guia/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+{{CSS}}
+</style>
+</head>
+<body>
+<div id="tip" role="tooltip"></div>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🧠</span> Opus 5.5</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#oque">{{t:nav_resumo}}</a>
+    <a class="sec" href="#precos">{{t:nav_precos}}</a>
+    <a class="sec" href="#benchmarks">{{t:nav_bench}}</a>
+    <a class="sec" href="#api">API</a>
+    <a class="sec" href="#sistemas">{{t:nav_sistemas}}</a>
+    <a class="sec" href="#guia">{{t:nav_plano}}</a>
+    <span class="lang" aria-label="{{t:lang_label}}"><a href="{{L_PT}}" class="{{ON_PT}}" hreflang="pt-BR">PT</a><a href="{{L_EN}}" class="{{ON_EN}}" hreflang="en">EN</a><a href="{{L_ES}}" class="{{ON_ES}}" hreflang="es">ES</a></span>
+    <button class="tgl" id="themeToggle" aria-label="{{t:theme_label}}" title="{{t:theme_label}}">🌙</button>
+    <a class="btn" href="https://github.com/inematds/claude-opus55" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">{{t:hero_chip}}</span>
+      <h1>{{t:hero_h1}}</h1>
+      <p class="lead">{{t:hero_lead}}</p>
+      <div class="cta">
+        <a class="btn" href="#guia">{{t:hero_cta}}</a>
+        <a class="btn ghost" href="https://github.com/inematds/claude-opus55" target="_blank" rel="noopener">{{t:hero_cta2}}</a>
+      </div>
+    </div>
+    <figure><img src="{{BANNER}}" alt="{{t:hero_alt}}"></figure>
+  </div>
+</header>
+
+<section id="oque"><div class="wrap">
+  <span class="chip">{{t:nav_resumo}}</span>
+  <h2>{{t:oque_h2}}</h2>
+  <p class="sub">{{t:oque_sub}}</p>
+  <div class="grid g3">
+    <div class="card stat"><div class="k">{{t:st1_k}}</div><div class="v">−20%</div><p>{{t:st1_d}}</p></div>
+    <div class="card stat"><div class="k">{{t:st2_k}}</div><div class="v">−60%</div><p>{{t:st2_d}}</p></div>
+    <div class="card stat"><div class="k">{{t:st3_k}}</div><div class="v">−40%</div><p>{{t:st3_d}}</p></div>
+    <div class="card stat"><div class="k">SWE-bench Pro</div><div class="v">{{t:st4_v}}</div><p>{{t:st4_d}}</p></div>
+    <div class="card stat"><div class="k">Terminal-Bench 4.0</div><div class="v">{{t:st5_v}}</div><p>{{t:st5_d}}</p></div>
+    <div class="card stat"><div class="k">AA Intelligence Index</div><div class="v">58</div><p>{{t:st6_d}}</p></div>
+  </div>
+  <ul class="feat">
+    <li>{{t:oque_li1}}</li>
+    <li>{{t:oque_li2}}</li>
+    <li>{{t:oque_li3}}</li>
+    <li>{{t:oque_li4}}</li>
+    <li>{{t:oque_li5}}</li>
+  </ul>
+</div></section>
+
+<section id="precos"><div class="wrap">
+  <span class="chip">{{t:nav_precos}}</span>
+  <h2>{{t:precos_h2}}</h2>
+  <p class="sub">{{t:precos_sub}}</p>
+  <div class="chart" id="c-preco-out"></div>
+  <div class="chart" id="c-preco-cache"></div>
+  <div class="tblwrap"><table>
+    <thead><tr><th>{{t:th_modelo}}</th><th class="n">{{t:th_in}}</th><th class="n">{{t:th_out}}</th><th class="n">Cache read</th><th class="n">Batch (in/out)</th><th class="n">Fast (in/out)</th></tr></thead>
+    <tbody>
+      <tr><td>Fable 5.1</td><td class="n">10</td><td class="n">50</td><td class="n">{{t:n_025}}</td><td class="n">5 / 25</td><td class="n">—</td></tr>
+      <tr class="hl"><td><b>Opus 5.5</b></td><td class="n"><b>4</b></td><td class="n"><b>20</b></td><td class="n"><b>{{t:n_020}}</b></td><td class="n">2 / 10</td><td class="n">8 / 40</td></tr>
+      <tr><td>Opus 5</td><td class="n">5</td><td class="n">25</td><td class="n">{{t:n_050}}</td><td class="n">{{t:n_batch5}}</td><td class="n">10 / 50</td></tr>
+      <tr><td>Opus 4.8</td><td class="n">5</td><td class="n">25</td><td class="n">{{t:n_050}}</td><td class="n">{{t:n_batch5}}</td><td class="n">10 / 50</td></tr>
+      <tr><td>Sonnet 5</td><td class="n">2</td><td class="n">10</td><td class="n">{{t:n_020}}</td><td class="n">1 / 5</td><td class="n">—</td></tr>
+      <tr><td>Haiku 4.5</td><td class="n">1</td><td class="n">5</td><td class="n">{{t:n_010}}</td><td class="n">{{t:n_batchh}}</td><td class="n">—</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">{{t:precos_src}}</p>
+  <div class="note amb"><strong class="t">{{t:precos_note_t}}</strong>
+    <ul><li>{{t:precos_note1}}</li><li>{{t:precos_note2}}</li></ul>
+  </div>
+</div></section>
+
+<section id="benchmarks"><div class="wrap">
+  <span class="chip">{{t:nav_bench}}</span>
+  <h2>{{t:bench_h2}}</h2>
+  <p class="sub">{{t:bench_sub}}</p>
+  <div class="chart" id="c-bench"></div>
+  <div class="chart" id="c-aa"></div>
+  <div class="note"><strong class="t">{{t:bench_note_t}}</strong>
+    <ul><li>{{t:bench_n1}}</li><li>{{t:bench_n2}}</li><li>{{t:bench_n3}}</li><li>{{t:bench_n4}}</li><li>{{t:bench_n5}}</li></ul>
+  </div>
+</div></section>
+
+<section id="effort"><div class="wrap">
+  <span class="chip">{{t:effort_chip}}</span>
+  <h2>{{t:effort_h2}}</h2>
+  <p class="sub">{{t:effort_sub}}</p>
+  <div class="chart" id="c-effort"></div>
+  <ul class="feat">
+    <li>{{t:effort_li1}}</li>
+    <li>{{t:effort_li2}}</li>
+    <li>{{t:effort_li3}}</li>
+  </ul>
+</div></section>
+
+<section id="api"><div class="wrap">
+  <span class="chip">{{t:api_chip}}</span>
+  <h2>{{t:api_h2}}</h2>
+  <p class="sub">{{t:api_sub}}</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>#</th><th>{{t:api_th1}}</th><th>{{t:api_th2}}</th><th>{{t:api_th3}}</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>{{t:api_r1a}}</td><td>400</td><td>{{t:api_r1c}}</td></tr>
+      <tr><td>2</td><td>{{t:api_r2a}}</td><td>400</td><td>{{t:api_r2c}}</td></tr>
+      <tr><td>3</td><td>{{t:api_r3a}}</td><td>{{t:api_r3b}}</td><td>{{t:api_r3c}}</td></tr>
+      <tr><td>4</td><td>{{t:api_r4a}}</td><td>400</td><td>{{t:api_r4c}}</td></tr>
+      <tr><td>5</td><td>{{t:api_r5a}}</td><td>{{t:api_r5b}}</td><td>{{t:api_r5c}}</td></tr>
+    </tbody>
+  </table></div>
+  <h3 class="h">{{t:api_h3a}}</h3>
+<pre><span class="c">{{t:api_code_c1}}</span>
+client.messages.create(model=<span class="s">"claude-opus-5"</span>, max_tokens=16000,
+    thinking={<span class="s">"type"</span>: <span class="s">"disabled"</span>}, temperature=0.4, messages=[...])
+
+<span class="c">{{t:api_code_c2}}</span>
+client.messages.create(model=<span class="s">"claude-opus-5-5"</span>, max_tokens=16000,
+    output_config={<span class="s">"effort"</span>: <span class="s">"low"</span>}, messages=[...])</pre>
+  <h3 class="h">{{t:api_h3b}}</h3>
+  <ul class="feat">
+    <li>{{t:api_her1}}</li>
+    <li>{{t:api_her2}}</li>
+    <li>{{t:api_her3}}</li>
+  </ul>
+  <h3 class="h">{{t:api_h3c}}</h3>
+  <p class="mut">{{t:api_seg}}</p>
+</div></section>
+
+<section id="sistemas"><div class="wrap">
+  <span class="chip">{{t:nav_sistemas}}</span>
+  <h2>{{t:sis_h2}}</h2>
+  <p class="sub">{{t:sis_sub}}</p>
+  <div class="note"><strong class="t">{{t:sis_note_t}}</strong>
+    <ul><li>{{t:sis_note1}}</li><li>{{t:sis_note2}}</li></ul>
+  </div>
+  <div class="chart" id="c-inv"></div>
+  <div class="tblwrap"><table>
+    <thead><tr><th>{{t:sis_th1}}</th><th>{{t:sis_th2}}</th><th>{{t:sis_th3}}</th><th>{{t:sis_th4}}</th><th>{{t:sis_th5}}</th></tr></thead>
+    <tbody>
+      <tr><td><b>yt-pub-lives</b> {{t:sis_yt_n}}</td><td>{{t:sis_yt_h}}</td><td>{{t:sis_yt_c}}</td><td>{{t:sis_yt_f}}</td><td><span class="prio alta">{{t:p_alta}}</span></td></tr>
+      <tr><td><b>openpcbotv2</b></td><td><code>claude-opus-5</code>, effort low</td><td>Agent SDK 0.2.50</td><td>{{t:sis_v2_f}}</td><td><span class="prio alta">{{t:p_alta}}</span></td></tr>
+      <tr><td><b>openpcbotv3</b></td><td>{{t:sis_v3_h}}</td><td>CLI 2.1.280</td><td>{{t:sis_v3_f}}</td><td><span class="prio ok">OK</span></td></tr>
+      <tr><td>{{t:sis_v3t_n}}</td><td>haiku-4.5 / sonnet-5</td><td>OpenRouter, <code>temperature 0.4</code></td><td>{{t:sis_v3t_f}}</td><td><span class="prio media">{{t:p_media}}</span></td></tr>
+      <tr><td><b>cerebro-vip</b> {{t:sis_cv_n}}</td><td>{{t:sis_cv_h}}</td><td>OpenRouter, <code>temperature 0.2</code></td><td>{{t:sis_cv_f}}</td><td><span class="prio media">{{t:p_media}}</span></td></tr>
+      <tr><td>{{t:sis_cron_n}}</td><td>alias <code>sonnet</code></td><td>CLI 2.1.63</td><td>{{t:sis_cron_f}}</td><td><span class="prio media">{{t:p_media}}</span></td></tr>
+      <tr><td>{{t:sis_ccv_n}}</td><td><code>claude-opus-5</code>, effort low</td><td>CLI</td><td>{{t:sis_ccv_f}}</td><td><span class="prio media">{{t:p_media}}</span></td></tr>
+      <tr><td>musicavideo</td><td><code>claude-fable-5</code></td><td>CLI</td><td>{{t:sis_mv_f}}</td><td><span class="prio media">{{t:p_media}}</span></td></tr>
+      <tr><td>{{t:sis_ccb_n}}</td><td>alias <code>sonnet</code>, effort low</td><td>CLI</td><td>{{t:sis_ccb_f}}</td><td><span class="prio baixa">{{t:p_baixa}}</span></td></tr>
+      <tr><td>{{t:sis_portal_n}}</td><td>haiku-4.5</td><td>OpenRouter</td><td>{{t:sis_portal_f}}</td><td><span class="prio baixa">{{t:p_baixa}}</span></td></tr>
+      <tr><td>iccmonit</td><td><code>claude-haiku-4-5-20251001</code></td><td>{{t:sis_icc_c}}</td><td>{{t:sis_icc_f}}</td><td><span class="prio baixa">{{t:p_baixa}}</span></td></tr>
+      <tr><td>claudebot, inemabot, dsh-sandbox</td><td>sonnet-4-6, opus-4-6, sonnet-4.5</td><td>{{t:sis_leg_c}}</td><td>{{t:sis_leg_f}}</td><td><span class="prio baixa">{{t:p_baixa}}</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">{{t:sis_src}}</p>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">{{t:guia_chip}}</span>
+  <h2>{{t:guia_h2}}</h2>
+  <p class="sub">{{t:guia_sub}}</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>{{t:g1_t}}</h3>
+    <p>{{t:g1_p}}</p>
+<pre><span class="c">{{t:g1_c1}}</span>
+<span class="k">which</span> -a claude; /usr/bin/claude --version; ~/.local/bin/claude --version
+<span class="c">{{t:g1_c2}}</span>
+<span class="k">npm</span> i -g @anthropic-ai/claude-code@latest
+<span class="c">{{t:g1_c3}}</span>
+Environment=PATH=/home/nmaldaner/.local/bin:/usr/local/bin:/usr/bin:/bin
+<span class="k">systemctl</span> --user daemon-reload &amp;&amp; systemctl --user restart <span class="s">'yt-scheduler*'</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>{{t:g2_t}}</h3>
+    <p>{{t:g2_p}}</p>
+<pre><span class="c">{{t:g2_c1}}</span>
+<span class="k">claude</span> --model opus -p <span class="s">"ok"</span> --output-format json | jq -c <span class="s">'.modelUsage|keys'</span>
+<span class="c">{{t:g2_c2}}</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>{{t:g3_t}}</h3>
+    <p>{{t:g3_p}}</p>
+<pre><span class="c">{{t:g3_c1}}</span>
+<span class="k">npm</span> i @anthropic-ai/claude-agent-sdk@latest
+<span class="c">{{t:g3_c2}}</span>
+model: claude-opus-5-5
+effort: low</pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>{{t:g4_t}}</h3>
+    <p>{{t:g4_p}}</p>
+<pre><span class="c">{{t:g4_c1}}</span>
+{ <span class="s">"model"</span>: <span class="s">"anthropic/claude-opus-..."</span>, <span class="s">"messages"</span>: [...] }</pre>
+  </div></div>
+
+  <div class="step"><div class="b">5</div><div>
+    <h3>{{t:g5_t}}</h3>
+    <p>{{t:g5_p}}</p>
+    <div class="tblwrap"><table>
+      <thead><tr><th>{{t:ck_th1}}</th><th>{{t:ck_th2}}</th></tr></thead>
+      <tbody>
+        <tr><td><span class="prio alta">{{t:ck_bl}}</span></td><td>{{t:ck1}}</td></tr>
+        <tr><td><span class="prio alta">{{t:ck_bl}}</span></td><td>{{t:ck2}}</td></tr>
+        <tr><td><span class="prio alta">{{t:ck_bl}}</span></td><td>{{t:ck3}}</td></tr>
+        <tr><td><span class="prio alta">{{t:ck_bl}}</span></td><td>{{t:ck4}}</td></tr>
+        <tr><td><span class="prio alta">{{t:ck_bl}}</span></td><td>{{t:ck5}}</td></tr>
+        <tr><td><span class="prio media">{{t:ck_aj}}</span></td><td>{{t:ck6}}</td></tr>
+        <tr><td><span class="prio media">{{t:ck_aj}}</span></td><td>{{t:ck7}}</td></tr>
+        <tr><td><span class="prio media">{{t:ck_aj}}</span></td><td>{{t:ck8}}</td></tr>
+      </tbody>
+    </table></div>
+  </div></div>
+  <div class="note amb"><strong class="t">{{t:guia_note_t}}</strong><ul><li>{{t:guia_note}}</li></ul></div>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <span class="chip">{{t:tl_chip}}</span>
+  <h2>{{t:tl_h2}}</h2>
+  <p class="sub">{{t:tl_sub}}</p>
+  <div class="phase"><div class="tag">{{t:d_2411}}</div><div class="d"><strong>Opus 4.5</strong><span>{{t:tl1}}</span></div></div>
+  <div class="phase"><div class="tag">{{t:d_0502}}</div><div class="d"><strong>Opus 4.6</strong><span>{{t:tl2}}</span></div></div>
+  <div class="phase"><div class="tag">{{t:d_1604}}</div><div class="d"><strong>Opus 4.7</strong><span>{{t:tl3}}</span></div></div>
+  <div class="phase"><div class="tag">{{t:d_2805}}</div><div class="d"><strong>Opus 4.8</strong><span>{{t:tl4}}</span></div></div>
+  <div class="phase"><div class="tag">{{t:d_0906}}</div><div class="d"><strong>Fable 5</strong><span>{{t:tl5}}</span></div></div>
+  <div class="phase"><div class="tag">{{t:d_3006}}</div><div class="d"><strong>Sonnet 5</strong><span>{{t:tl6}}</span></div></div>
+  <div class="phase"><div class="tag">{{t:d_2407}}</div><div class="d"><strong>Opus 5</strong><span>{{t:tl7}}</span></div></div>
+  <div class="phase"><div class="tag">{{t:d_0109}}</div><div class="d"><strong>Fable 5.1</strong><span>{{t:tl8}}</span></div></div>
+  <div class="phase"><div class="tag">{{t:d_2209}}</div><div class="d"><strong>Opus 5.5</strong><span>{{t:tl9}}</span></div></div>
+  <div class="phase"><div class="tag">{{t:d_prox}}</div><div class="d"><strong>Sonnet 5.5 · Haiku 5.5</strong><span>{{t:tl10}}</span></div></div>
+</div></section>
+
+<section id="fontes"><div class="wrap">
+  <span class="chip">{{t:src_chip}}</span>
+  <h2>{{t:src_h2}}</h2>
+  <p class="sub">{{t:src_sub}}</p>
+  <h3 class="h">{{t:src_of}}</h3>
+  <ol class="srcs">
+    <li>[A] {{t:src_a}} — <a href="https://www.anthropic.com/claude-opus-5-5">anthropic.com/claude-opus-5-5</a></li>
+    <li>[MP] {{t:src_mp}} — <a href="https://platform.claude.com/docs/en/models/opus-5-5/overview">platform.claude.com/…/opus-5-5/overview</a></li>
+    <li>[W] What's new — <a href="https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5">platform.claude.com/…/whats-new-opus-5-5</a></li>
+    <li>[MG] {{t:src_mg}} — <a href="https://platform.claude.com/docs/en/models/opus-5-5/migration-guide">platform.claude.com/…/opus-5-5/migration-guide</a></li>
+    <li>[MO] {{t:src_mo}} — <a href="https://platform.claude.com/docs/en/about-claude/models/overview">platform.claude.com/…/models/overview</a></li>
+    <li>[PR] {{t:src_pr}} — <a href="https://platform.claude.com/docs/en/about-claude/pricing">platform.claude.com/…/pricing</a></li>
+    <li>[RN] Release notes — <a href="https://platform.claude.com/docs/en/release-notes/overview">platform.claude.com/…/release-notes</a></li>
+    <li>[SC] System Card Opus 5.5 — <a href="https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf">PDF</a></li>
+    <li>[SC5] System Card Opus 5 — <a href="https://www-cdn.anthropic.com/c5fbac3f0b1280a933ebd26d3cb8bb9f5bdeaf48/Claude%20Opus%205%20System%20Card.pdf">PDF</a></li>
+  </ol>
+  <h3 class="h">{{t:src_ter}}</h3>
+  <ol class="srcs">
+    <li>Artificial Analysis — <a href="https://artificialanalysis.ai/models/releases/claude-opus-5-5">release</a> · <a href="https://artificialanalysis.ai/leaderboards/models">leaderboard</a></li>
+    <li>GitHub Changelog — <a href="https://github.blog/changelog/2026-09-22-claude-opus-5-5-is-now-available-in-github-copilot/">Opus 5.5 / Copilot</a></li>
+    <li>CodeRabbit — <a href="https://www.coderabbit.ai/blog/opus-5-5-model-review">"More catches, different misses"</a></li>
+    <li>OrcaRouter — <a href="https://www.orcarouter.ai/blog/claude-opus-5-5-vs-claude-opus-5">Opus 5.5 vs Opus 5</a></li>
+    <li>The Decoder — <a href="https://the-decoder.com/claude-opus-5-5-matches-fable-5-1-at-40-percent-lower-cost-as-anthropic-promises-to-fix-claudish-writing/">the-decoder.com</a></li>
+    <li><a href="https://www.macrumors.com/2026/09/22/anthropic-claude-opus-5-5/">MacRumors</a> · <a href="https://9to5mac.com/2026/09/22/anthropic-upgrades-claude-with-new-opus-5-5-model-details-here/">9to5Mac</a> · <a href="https://www.xda-developers.com/anthropic-releases-claude-opus-55-and-its-not-just-more-powerful-its-cheaper-too/">XDA</a> · <a href="https://www.thurrott.com/a-i/anthropic/341913/anthropic-releases-claude-opus-5-5">Thurrott</a></li>
+  </ol>
+</div></section>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">Claude Opus 5.5</div><div class="pill">{{t:pill2}}</div><div class="pill">PT · EN · ES</div>
+    <p style="margin-top:18px">Claude Opus 5.5 · {{t:foot_nota}} ·
+      <a href="https://github.com/inematds/claude-opus55">inematds/claude-opus55</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='claude-opus55-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    try{ if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; } }catch(e){}
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      try{ localStorage.setItem(KEY, light?'light':'dark'); }catch(e){}
+    });
+  })();
+</script>
+<script>
+var LOCALE='{{LOCALE}}', C={{CHARTS}};
+{{JS}}
+</script>
+</body>
+</html>

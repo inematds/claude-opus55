@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<!-- GERADO por scripts/build.py a partir de src/guia.template.html + i18n/<idioma>.json. Não edite o HTML gerado. -->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Opus 5.5 — Investigación y plan de actualización</title>
+<meta name="description" content="Investigación sobre Claude Opus 5.5 (lanzado el 22/09/2026): precios, gráficos de benchmarks, cambios en la API y el plan de actualización de los sistemas de INEMA.">
+<meta property="og:title" content="Claude Opus 5.5 — Investigación y plan de actualización">
+<meta property="og:description" content="Investigación sobre Claude Opus 5.5 (lanzado el 22/09/2026): precios, gráficos de benchmarks, cambios en la API y el plan de actualización de los sistemas de INEMA.">
+<meta property="og:image" content="https://inematds.github.io/claude-opus55/capa/capa.png">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/claude-opus55/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/claude-opus55/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/claude-opus55/guia/es/">
+<link rel="alternate" hreflang="x-default" href="https://inematds.github.io/claude-opus55/guia/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;display:block}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:16px;margin-bottom:26px}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+  /* ── extensões desta página (gráficos, tabelas, notas, idiomas). O CSS do template fica intacto. ── */
+  :root{ --s1:#d95926; --s2:#3987e5; --s3:#199e70; --neutral:#4a4a56; --grid:#272730; --ok:#6fae6f; --warn:#d9b25a; --bad:#e06a5a; }
+  body.light{ --s1:#eb6834; --s2:#2a78d6; --s3:#1baf7a; --neutral:#c3c4cc; --grid:#e1e3ea; --ok:#2f7d32; --warn:#8a6400; --bad:#b3261e; }
+  body.light nav{background:rgba(246,247,249,.85)}
+  code{font-size:.86em;background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding:1px 5px;word-break:break-word}
+  pre code{background:none;border:0;padding:0;font-size:inherit}
+  .lang{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-family:Sora;font-size:.78rem;font-weight:600}
+  .lang a{padding:.45em .6em;color:var(--mut)}
+  .lang a.on{background:var(--amb);color:#1a1206}
+  .stat .v{font-family:Sora;font-weight:800;font-size:2rem;letter-spacing:-.02em;color:var(--txt);margin:.1em 0}
+  .stat .k{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amb);font-family:Sora;font-weight:600}
+  ul.feat{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:12px}
+  ul.feat li{padding-left:24px;position:relative;color:var(--txt)}
+  ul.feat li::before{content:"";position:absolute;left:0;top:10px;width:8px;height:8px;border-radius:50%;background:var(--amb)}
+  .tblwrap{overflow-x:auto;margin:14px 0 8px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  th{color:var(--mut);font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;background:var(--bg2);white-space:nowrap;font-family:Sora}
+  td.n,th.n{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+  tr.hl td{background:rgba(226,162,59,.09)}
+  .prio{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.06em;border-radius:6px;padding:2px 8px;white-space:nowrap;font-family:Sora}
+  .prio.alta{color:var(--bad);border:1px solid var(--bad)}
+  .prio.media{color:var(--warn);border:1px solid var(--warn)}
+  .prio.baixa{color:var(--mut);border:1px solid var(--line)}
+  .prio.ok{color:var(--ok);border:1px solid var(--ok)}
+  .note{background:var(--bg2);border-left:3px solid var(--warn);border-radius:0 12px 12px 0;padding:16px 20px;margin:18px 0}
+  .note.amb{border-left-color:var(--amb)}
+  .note strong.t{display:block;color:var(--warn);margin-bottom:6px;font-family:Sora}
+  .note.amb strong.t{color:var(--amb)}
+  .note ul{margin:0;padding-left:18px}
+  .note li{color:var(--mut);font-size:.9rem;margin-bottom:5px}
+  .src{font-size:.78rem;color:var(--mut);opacity:.85;margin:6px 0 0}
+  .chart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 14px;margin:16px 0 20px}
+  .chart .ct{font-family:Sora;font-weight:600;font-size:1.02rem}
+  .chart .cs{font-size:.85rem;color:var(--mut);margin:2px 0 12px}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.84rem;color:var(--mut);margin-bottom:10px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+  .hb .row{display:grid;grid-template-columns:minmax(120px,210px) 1fr;gap:12px;align-items:center;padding:5px 0}
+  .hb .lab{font-size:.84rem;line-height:1.25}
+  .hb .bars{display:grid;gap:2px}
+  .hb .bar{height:11px;display:flex;align-items:center}
+  .hb .fill{height:100%;border-radius:0 4px 4px 0;min-width:2px}
+  .hb .val{font-size:.74rem;color:var(--mut);margin-left:6px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .hb .bar:hover .fill{filter:brightness(1.15)}
+  .hb.single .bar{height:16px}
+  .hb.single .val{font-size:.8rem;color:var(--txt)}
+  details.data{margin-top:8px;font-size:.84rem}
+  details.data summary{cursor:pointer;color:var(--mut)}
+  #tip{position:fixed;pointer-events:none;z-index:50;background:var(--txt);color:var(--bg);font-size:.8rem;line-height:1.4;padding:7px 10px;border-radius:8px;opacity:0;transition:opacity .1s;max-width:260px}
+  svg text{fill:var(--mut);font-size:11px;font-family:Inter,sans-serif}
+  svg .axis{stroke:var(--grid)}
+  ol.srcs{padding-left:20px;display:grid;gap:6px;margin:10px 0 22px}
+  ol.srcs li{font-size:.88rem;color:var(--mut);word-break:break-word}
+  section h3.h{font-size:1.15rem;margin:30px 0 8px}
+  @media(max-width:560px){ .hb .row{grid-template-columns:1fr;gap:3px} .wrap{padding:0 16px} nav .wrap{gap:12px} nav .brand{font-size:.95rem} }
+  .step>div,.hero .wrap>div,.grid>*,.hb .row>*{min-width:0}
+  nav .brand{white-space:nowrap}
+  @media(max-width:560px){ nav .wrap{flex-wrap:wrap;height:auto;padding-top:8px;padding-bottom:8px;row-gap:8px} nav .links{margin-left:0;gap:10px} }
+
+</style>
+</head>
+<body>
+<div id="tip" role="tooltip"></div>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🧠</span> Opus 5.5</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#oque">Resumen</a>
+    <a class="sec" href="#precos">Precios</a>
+    <a class="sec" href="#benchmarks">Benchmarks</a>
+    <a class="sec" href="#api">API</a>
+    <a class="sec" href="#sistemas">Sistemas</a>
+    <a class="sec" href="#guia">Plan</a>
+    <span class="lang" aria-label="Idioma"><a href="../" class="" hreflang="pt-BR">PT</a><a href="../en/" class="" hreflang="en">EN</a><a href="./" class="on" hreflang="es">ES</a></span>
+    <button class="tgl" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
+    <a class="btn" href="https://github.com/inematds/claude-opus55" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">Investigación · lanzamiento del 22/09/2026</span>
+      <h1>Claude Opus 5.5: <span class="amb">más barato</span>, más fuerte y con API nueva</h1>
+      <p class="lead">Precios, benchmarks, qué cambia en la API y qué actualizar en cada sistema para usar el nuevo modelo.</p>
+      <div class="cta">
+        <a class="btn" href="#guia">Ver el plan de actualización</a>
+        <a class="btn ghost" href="https://github.com/inematds/claude-opus55" target="_blank" rel="noopener">Ver en GitHub</a>
+      </div>
+    </div>
+    <figure><img src="../assets/banner-es.jpg" alt="Banner de Claude Opus 5.5: investigación y plan de actualización"></figure>
+  </div>
+</header>
+
+<section id="oque"><div class="wrap">
+  <span class="chip">Resumen</span>
+  <h2>Más barato que Opus 5 y por delante de él en casi todo</h2>
+  <p class="sub">Con cuatro cambios de API que rompen código antiguo. API ID <code>claude-opus-5-5</code>, 1M de contexto, 128K de salida, effort predeterminado <code>medium</code>.</p>
+  <div class="grid g3">
+    <div class="card stat"><div class="k">Precio vs Opus 5</div><div class="v">−20%</div><p>US$ 4/20 frente a 5/25 por millón de tokens</p></div>
+    <div class="card stat"><div class="k">Cache read</div><div class="v">−60%</div><p>US$ 0,20 frente a 0,50</p></div>
+    <div class="card stat"><div class="k">Costo por tarea</div><div class="v">−40%</div><p>aproximado; estimación de Anthropic con la configuración predeterminada</p></div>
+    <div class="card stat"><div class="k">SWE-bench Pro</div><div class="v">89,9</div><p>Opus 5: 79,2 (system card, effort max)</p></div>
+    <div class="card stat"><div class="k">Terminal-Bench 4.0</div><div class="v">66,4%</div><p>+14 puntos sobre Opus 5</p></div>
+    <div class="card stat"><div class="k">AA Intelligence Index</div><div class="v">58</div><p>1.º puesto en Artificial Analysis el 22/09/2026</p></div>
+  </div>
+  <ul class="feat">
+    <li><b>Lanzado el 22/09/2026</b>, el primero de la familia "Claude 5.5". Sonnet 5.5 y Haiku 5.5 llegan "en las próximas semanas".</li>
+    <li><b>Disponible en</b> claude.ai (Pro, Max, Team, Enterprise), Claude Code, la API, Bedrock (<code>anthropic.claude-opus-5-5</code>), Vertex, Foundry, Claude Platform on AWS y GitHub Copilot.</li>
+    <li><b>Recomendación oficial:</b> "empiece por Opus 5.5 en la mayoría de las cargas". Fable 5.1 queda para el razonamiento más exigente.</li>
+    <li><b>Thinking siempre activado.</b> La palanca de costo y latencia pasa a ser el <code>effort</code>, y el valor predeterminado bajó de <code>high</code> a <code>medium</code>.</li>
+    <li><b>En nuestro servidor ya está en uso:</b> en Claude Code 2.1.280 el alias <code>opus</code> apunta a <code>claude-opus-5-5</code> (probado el 22/09). Ningún sistema fija el nuevo ID todavía.</li>
+  </ul>
+</div></section>
+
+<section id="precos"><div class="wrap">
+  <span class="chip">Precios</span>
+  <h2>El Opus más barato hasta hoy</h2>
+  <p class="sub">Y con el mayor descuento de caché de la línea Opus.</p>
+  <div class="chart" id="c-preco-out"></div>
+  <div class="chart" id="c-preco-cache"></div>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Modelo</th><th class="n">Entrada</th><th class="n">Salida</th><th class="n">Cache read</th><th class="n">Batch (in/out)</th><th class="n">Fast (in/out)</th></tr></thead>
+    <tbody>
+      <tr><td>Fable 5.1</td><td class="n">10</td><td class="n">50</td><td class="n">0,25</td><td class="n">5 / 25</td><td class="n">—</td></tr>
+      <tr class="hl"><td><b>Opus 5.5</b></td><td class="n"><b>4</b></td><td class="n"><b>20</b></td><td class="n"><b>0,20</b></td><td class="n">2 / 10</td><td class="n">8 / 40</td></tr>
+      <tr><td>Opus 5</td><td class="n">5</td><td class="n">25</td><td class="n">0,50</td><td class="n">2,50 / 12,50</td><td class="n">10 / 50</td></tr>
+      <tr><td>Opus 4.8</td><td class="n">5</td><td class="n">25</td><td class="n">0,50</td><td class="n">2,50 / 12,50</td><td class="n">10 / 50</td></tr>
+      <tr><td>Sonnet 5</td><td class="n">2</td><td class="n">10</td><td class="n">0,20</td><td class="n">1 / 5</td><td class="n">—</td></tr>
+      <tr><td>Haiku 4.5</td><td class="n">1</td><td class="n">5</td><td class="n">0,10</td><td class="n">0,50 / 2,50</td><td class="n">—</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">US$ por millón de tokens. Fuente: página oficial de precios de Anthropic [PR]. El fast mode es un research preview y solo existe en la Claude API.</p>
+  <div class="note amb"><strong class="t">Qué significa en la práctica</strong>
+    <ul><li>Con el cache read a 0,05x de la entrada, las sesiones largas de agentes que releen el mismo prefijo (bots, Claude Code) salen mucho más baratas. En cambio, un cache miss pesa más en términos relativos.</li><li>En las suscripciones (Claude Code, claude.ai) el precio por token no se ve, pero Anthropic aumentó los límites de 5 horas en los planes de pago.</li></ul>
+  </div>
+</div></section>
+
+<section id="benchmarks"><div class="wrap">
+  <span class="chip">Benchmarks</span>
+  <h2>Supera a Opus 5 y a Fable 5.1 en casi todas las pruebas del system card</h2>
+  <p class="sub">Y pierde frente a GPT-6 Astra en tres.</p>
+  <div class="chart" id="c-bench"></div>
+  <div class="chart" id="c-aa"></div>
+  <div class="note"><strong class="t">Léalo con cuidado</strong>
+    <ul><li>Los números oficiales son <b>autoinformados</b> y medidos con effort <code>max</code> (Terminal-Bench en <code>xhigh</code>), con los safeguards de producción activados. Varios los ejecutaron socios (Cognition, Cursor, Zapier, Artificial Analysis).</li><li>Anthropic reevalúa los modelos anteriores en cada system card. Opus 5 tiene 1861 en GDPval-AA v2 en su propio card y 1708 en v2.1 en el card de 5.5. <b>No mezcle tablas.</b></li><li>Donde Opus 5.5 pierde: Terminal-Bench-Science (58,7 frente a 64,6 de GPT-6 Astra), AutomationBench (40,0 frente a 41,4), FrontierSWE v2 (62,3 frente a 65,5) y OfficeQA (frente a Fable 5.1).</li><li>No se informaron para 5.5: SWE-bench Verified, ARC-AGI, GPQA, AIME/USAMO, BrowseComp ni τ-bench. El modelo aún no aparece en LMArena.</li><li>La propia Anthropic dice que "los márgenes de benchmark se han vuelto una guía menos fiable" y que la distancia real con Fable 5.1 "es menor de lo que sugieren las notas".</li></ul>
+  </div>
+</div></section>
+
+<section id="effort"><div class="wrap">
+  <span class="chip">Effort × costo</span>
+  <h2>En high, Opus 5.5 ya supera a Fable 5.1 en max</h2>
+  <p class="sub">Por menos de una cuarta parte del costo por tarea, según Artificial Analysis.</p>
+  <div class="chart" id="c-effort"></div>
+  <ul class="feat">
+    <li><b>El valor predeterminado ahora es <code>medium</code>.</b> Si no define el effort, baja un nivel respecto de Opus 5. En las pruebas de Anthropic, 5.5 en <code>medium</code> supera a Opus 5 en <code>high</code> en código y trabajo de conocimiento.</li>
+    <li><b>Más effort no siempre rinde más.</b> En FrontierCode, <code>medium</code> marca 54,6% y <code>max</code> 54,4%. En CursorBench, pasar de <code>medium</code> (52,5%, ~US$ 3 por tarea) a <code>max</code> (57,8%) aporta unos 5 puntos, pagando más por tarea.</li>
+    <li><b>Con el mismo nivel, piensa más por turno</b> que Opus 5, sobre todo en <code>xhigh</code> y <code>max</code>. Deje margen en <code>max_tokens</code> (64K es el punto de partida sugerido para turnos largos de agente).</li>
+  </ul>
+</div></section>
+
+<section id="api"><div class="wrap">
+  <span class="chip">Cambios de API</span>
+  <h2>Cuatro breaking changes y un cambio silencioso</h2>
+  <p class="sub">Respecto de Opus 5. Quien viene de 4.x también hereda las restricciones anteriores.</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>#</th><th>Qué cambia</th><th>Error</th><th>Cómo migrar</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><b>El thinking no se desactiva.</b> <code>{type:"disabled"}</code> y <code>budget_tokens</code> se rechazan con cualquier effort.</td><td>400</td><td>Omitir <code>thinking</code> (o usar <code>adaptive</code>) y controlarlo con <code>output_config.effort</code>. Para baja latencia, <code>low</code>.</td></tr>
+      <tr><td>2</td><td><b>Sin forced tool use.</b> <code>tool_choice</code> <code>any</code>/<code>tool</code> se rechazan, también en Batches y count_tokens.</td><td>400</td><td><code>auto</code> + <code>strict: true</code> + una instrucción en el prompt, y comprobar que la llamada ocurrió. Para extraer JSON, structured outputs.</td></tr>
+      <tr><td>3</td><td><b>Preserved thinking.</b> Los thinking blocks quedan ligados al modelo y a la conversación. Las cuentas creadas desde el 31/08/2026 reciben un 400 si se edita el historial.</td><td>400 / descarte</td><td>Historial solo por adición. Un mensaje <code>system</code> en medio de la conversación en lugar de editar el <code>system</code>. O el beta <code>thinking-binding-controls</code> con <code>drop_block</code>.</td></tr>
+      <tr><td>4</td><td><b>Computer use</b> solo mediante <code>computer_toolset_20260801</code>. <code>computer_20251124</code> se rechaza (API y Google Cloud).</td><td>400</td><td>Cambiar la declaración de la tool y el bucle del agente (la acción pasa a ser el <code>name</code> del bloque, varios por turno).</td></tr>
+      <tr><td>5</td><td><b>El texto entre tool calls</b> llega ahora como thinking blocks de progreso, vacíos con el <code>display</code> predeterminado.</td><td>ninguno</td><td><code>thinking.display: "updates"</code> (beta) o <code>"summarized"</code>, y mostrar esos bloques.</td></tr>
+    </tbody>
+  </table></div>
+  <h3 class="h">Antes y después (Python)</h3>
+<pre><span class="c"># Antes: aceptado en Opus 5, 400 en Opus 5.5</span>
+client.messages.create(model=<span class="s">"claude-opus-5"</span>, max_tokens=16000,
+    thinking={<span class="s">"type"</span>: <span class="s">"disabled"</span>}, temperature=0.4, messages=[...])
+
+<span class="c"># Después: thinking siempre activado, el effort es el control</span>
+client.messages.create(model=<span class="s">"claude-opus-5-5"</span>, max_tokens=16000,
+    output_config={<span class="s">"effort"</span>: <span class="s">"low"</span>}, messages=[...])</pre>
+  <h3 class="h">También heredado (si viene de 4.x)</h3>
+  <ul class="feat">
+    <li><code>temperature</code>, <code>top_p</code> y <code>top_k</code> con valores no predeterminados dan 400 desde Opus 4.7.</li>
+    <li>El prefill de mensajes del asistente da 400 desde Opus 4.6.</li>
+    <li>El tokenizer de 4.7 en adelante genera entre 1x y 1,35x más tokens que los modelos anteriores.</li>
+  </ul>
+  <h3 class="h">Seguridad</h3>
+  <p class="mut">El primer Opus con clasificadores de <b>cyber, bio</b> y <b>anti-extracción del razonamiento</b> (<code>reasoning_extraction</code>). Un rechazo vuelve como HTTP 200 con <code>stop_reason: "refusal"</code>. La recomendación es activar el fallback del lado del servidor (<code>fallbacks: "default"</code>), sabiendo que el modelo de fallback funciona sin los thinking blocks de 5.5. El system card no cita ningún nivel ASL y señala salvedades: el modelo sigue más instrucciones maliciosas pegadas por el usuario y acepta más afirmaciones de autorización que no se pueden verificar.</p>
+</div></section>
+
+<section id="sistemas"><div class="wrap">
+  <span class="chip">Sistemas</span>
+  <h2>Dónde funciona Claude hoy en los sistemas de INEMA</h2>
+  <p class="sub">Inventario de solo lectura del servidor el 22/09/2026: modelo, forma de llamada, qué hacer y prioridad.</p>
+  <div class="note"><strong class="t">Dos hallazgos que van antes de cualquier cambio de modelo</strong>
+    <ul><li><b>Hay dos <code>claude</code> instalados.</b> <code>~/.local/bin/claude</code> es la 2.1.280 y <code>/usr/bin/claude</code> es la 2.1.63, de un npm global antiguo. Las 17 <code>yt-scheduler*.service</code> y dos crons ponen <code>/usr/bin</code> primero en el PATH, así que ejecutan la versión antigua, que usa <code>claude-opus-4-6</code> por defecto. Cambiar el modelo en la configuración no llega a ellos.</li><li><b>openpcbotv2 usa el Agent SDK 0.2.50</b>, que trae un CLI 2.1.50 integrado. Primero actualizar el SDK y después cambiar el ID.</li></ul>
+  </div>
+  <div class="chart" id="c-inv"></div>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Sistema</th><th>Hoy</th><th>Cómo llama</th><th>Qué hacer</th><th>Prioridad</th></tr></thead>
+    <tbody>
+      <tr><td><b>yt-pub-lives</b> (17 schedulers)</td><td><code>claude-opus-4-6</code> (predeterminado de 2.1.63)</td><td><code>claude -p</code>, CLI antiguo</td><td>Corregir el PATH de las units (o actualizar <code>/usr/bin/claude</code>) y pasar <code>--model opus</code> de forma explícita.</td><td><span class="prio alta">ALTA</span></td></tr>
+      <tr><td><b>openpcbotv2</b></td><td><code>claude-opus-5</code>, effort low</td><td>Agent SDK 0.2.50</td><td>Actualizar el SDK, cambiar a <code>claude-opus-5-5</code> en los <code>agent.yaml</code>, mantener el effort explícito e incluir <code>xhigh</code> en el tipo.</td><td><span class="prio alta">ALTA</span></td></tr>
+      <tr><td><b>openpcbotv3</b></td><td>alias <code>opus</code> → <b>ya es 5.5</b></td><td>CLI 2.1.280</td><td>Nada en el modelo. Comprobar que el effort es explícito en el yaml (el predeterminado de 5.5 es <code>medium</code>).</td><td><span class="prio ok">OK</span></td></tr>
+      <tr><td>openpcbotv3 (tiers de OpenRouter)</td><td>haiku-4.5 / sonnet-5</td><td>OpenRouter, <code>temperature 0.4</code></td><td>Si el tier premium pasa a Opus 5.5, quitar <code>temperature</code>. Corregir la tabla de precios de opus-5 (dice 15/75; lo correcto es 5/25).</td><td><span class="prio media">MEDIA</span></td></tr>
+      <tr><td><b>cerebro-vip</b> (API de chat)</td><td>opus-4.8, sonnet-5, fable-5 (predeterminado glm-5.2)</td><td>OpenRouter, <code>temperature 0.2</code></td><td>Añadir Opus 5.5 a la lista y no enviar <code>temperature</code> a los modelos Claude 4.7+.</td><td><span class="prio media">MEDIA</span></td></tr>
+      <tr><td>Crons de cerebro-vip y telegramtopicosindex</td><td>alias <code>sonnet</code></td><td>CLI 2.1.63</td><td>La misma corrección de PATH que los schedulers.</td><td><span class="prio media">MEDIA</span></td></tr>
+      <tr><td>inemaccvbot (detenido)</td><td><code>claude-opus-5</code>, effort low</td><td>CLI</td><td>Cambiar a <code>claude-opus-5-5</code> cuando se reactive.</td><td><span class="prio media">MEDIA</span></td></tr>
+      <tr><td>musicavideo</td><td><code>claude-fable-5</code></td><td>CLI</td><td>Decisión de producto: probar Opus 5.5, que en el system card supera a Fable 5.1 en la mayoría de las pruebas y cuesta un 60% menos.</td><td><span class="prio media">MEDIA</span></td></tr>
+      <tr><td>inemaccbot (10 perfiles)</td><td>alias <code>sonnet</code>, effort low</td><td>CLI</td><td>Nada por ahora. Sonnet 5.5 llega en semanas y el alias se actualiza solo.</td><td><span class="prio baixa">BAJA</span></td></tr>
+      <tr><td>Portal (chat del sitio)</td><td>haiku-4.5</td><td>OpenRouter</td><td>Nada por ahora. Esperar a Haiku 5.5.</td><td><span class="prio baixa">BAJA</span></td></tr>
+      <tr><td>iccmonit</td><td><code>claude-haiku-4-5-20251001</code></td><td>SDK de Python</td><td>Mantener. Si algún día pasa a Opus 5.5, leer la respuesta por <code>type</code> (hoy usa <code>content[0].text</code>, que se rompe con thinking).</td><td><span class="prio baixa">BAJA</span></td></tr>
+      <tr><td>claudebot, inemabot, dsh-sandbox</td><td>sonnet-4-6, opus-4-6, sonnet-4.5</td><td>varios</td><td>Legado detenido. Actualizar solo si vuelve a funcionar.</td><td><span class="prio baixa">BAJA</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">No usan Claude: inemanews, inemaeventos y las novedades del portal (Groq), webmcp-readiness, inemacbot, agentehermes, dsh-orchestrator y cerebro-pro.</p>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">Plan de actualización · paso a paso</span>
+  <h2>De lo que más desbloquea al ajuste fino</h2>
+  <p class="sub">Cinco pasos con comandos reales. El orden importa: sin el paso 1, los cambios de modelo no llegan a los servicios que ejecutan el CLI antiguo.</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Desbloquear el CLI</h3>
+    <p>Averiguar qué <code>claude</code> ve cada servicio y hacer que todos usen la versión actual.</p>
+<pre><span class="c"># ver las dos instalaciones</span>
+<span class="k">which</span> -a claude; /usr/bin/claude --version; ~/.local/bin/claude --version
+<span class="c"># opción A: actualizar el npm global antiguo</span>
+<span class="k">npm</span> i -g @anthropic-ai/claude-code@latest
+<span class="c"># opción B: en las units yt-scheduler*.service, poner ~/.local/bin primero en el PATH</span>
+Environment=PATH=/home/nmaldaner/.local/bin:/usr/local/bin:/usr/bin:/bin
+<span class="k">systemctl</span> --user daemon-reload &amp;&amp; systemctl --user restart <span class="s">'yt-scheduler*'</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>Confirmar a dónde apunta el alias</h3>
+    <p>El alias <code>opus</code> sigue al modelo más nuevo. Prefiera el alias a fijar un ID; fíjelo solo donde importe la reproducibilidad.</p>
+<pre><span class="c"># qué modelo respondió de verdad</span>
+<span class="k">claude</span> --model opus -p <span class="s">"ok"</span> --output-format json | jq -c <span class="s">'.modelUsage|keys'</span>
+<span class="c"># el 22/09/2026: ["claude-opus-5-5"]</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>Cambiar el ID donde está fijado</h3>
+    <p>En openpcbotv2, actualizar primero el Agent SDK y después cambiar el modelo en los <code>agent.yaml</code>, manteniendo el effort explícito.</p>
+<pre><span class="c"># 1) SDK actual (el 0.2.50 trae un CLI 2.1.50 integrado)</span>
+<span class="k">npm</span> i @anthropic-ai/claude-agent-sdk@latest
+<span class="c"># 2) agents/*/agent.yaml</span>
+model: claude-opus-5-5
+effort: low</pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>Limpiar las llamadas vía OpenRouter</h3>
+    <p>Antes de apuntar a Claude 4.7 o posterior, quitar <code>temperature</code>, <code>top_p</code> y <code>top_k</code> del cuerpo de la petición. Falta comprobar el slug de Opus 5.5 en OpenRouter.</p>
+<pre><span class="c"># sin temperature/top_p/top_k para Claude 4.7+</span>
+{ <span class="s">"model"</span>: <span class="s">"anthropic/claude-opus-..."</span>, <span class="s">"messages"</span>: [...] }</pre>
+  </div></div>
+
+  <div class="step"><div class="b">5</div><div>
+    <h3>Checklist oficial para código de la API</h3>
+    <p>Para cualquier código que llame a la API directamente (guía de migración de Anthropic).</p>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Tipo</th><th>Elemento</th></tr></thead>
+      <tbody>
+        <tr><td><span class="prio alta">BLOQUEA</span></td><td>ID <code>claude-opus-5-5</code> (Bedrock: <code>anthropic.claude-opus-5-5</code>).</td></tr>
+        <tr><td><span class="prio alta">BLOQUEA</span></td><td>Quitar <code>thinking disabled</code> y <code>budget_tokens</code>. Dimensionar <code>max_tokens</code> para thinking + respuesta. Leer los bloques por <code>type</code>.</td></tr>
+        <tr><td><span class="prio alta">BLOQUEA</span></td><td>Cambiar <code>tool_choice</code> <code>any</code>/<code>tool</code> por <code>auto</code> + <code>strict</code>, o structured outputs.</td></tr>
+        <tr><td><span class="prio alta">BLOQUEA</span></td><td>Computer use mediante <code>computer_toolset_20260801</code>.</td></tr>
+        <tr><td><span class="prio alta">BLOQUEA</span></td><td>Historial solo por adición (preserved thinking). Tratar <code>stop_reason: "refusal"</code> y activar el fallback.</td></tr>
+        <tr><td><span class="prio media">AJUSTE</span></td><td>Definir el <code>effort</code> de forma explícita y medir <code>low</code>/<code>medium</code> antes de subir.</td></tr>
+        <tr><td><span class="prio media">AJUSTE</span></td><td>Interfaces que mostraban texto entre tool calls: <code>display: "updates"</code>.</td></tr>
+        <tr><td><span class="prio media">AJUSTE</span></td><td>Volver a medir costo y latencia. Revisar los prompts escritos para Opus 5 (verbosidad, verificación).</td></tr>
+      </tbody>
+    </table></div>
+  </div></div>
+  <div class="note amb"><strong class="t">Todavía no se cambió nada</strong><ul><li>Esta página es la investigación y el plan. Aplicarlo en los sistemas de producción es un paso aparte.</li></ul></div>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <span class="chip">Cronología</span>
+  <h2>Nueve lanzamientos en diez meses</h2>
+  <p class="sub">Fechas de la API, según las release notes de Anthropic.</p>
+  <div class="phase"><div class="tag">24/11/2025</div><div class="d"><strong>Opus 4.5</strong><span>El parámetro effort entra en beta.</span></div></div>
+  <div class="phase"><div class="tag">05/02/2026</div><div class="d"><strong>Opus 4.6</strong><span>Adaptive thinking; budget_tokens obsoleto; prefill eliminado.</span></div></div>
+  <div class="phase"><div class="tag">16/04/2026</div><div class="d"><strong>Opus 4.7</strong><span>Tokenizer nuevo; parámetros de muestreo rechazados.</span></div></div>
+  <div class="phase"><div class="tag">28/05/2026</div><div class="d"><strong>Opus 4.8</strong><span>1M de contexto por defecto.</span></div></div>
+  <div class="phase"><div class="tag">09/06/2026</div><div class="d"><strong>Fable 5</strong><span>Y Mythos 5, restringido al Project Glasswing.</span></div></div>
+  <div class="phase"><div class="tag">30/06/2026</div><div class="d"><strong>Sonnet 5</strong><span>US$ 2/10 por millón de tokens.</span></div></div>
+  <div class="phase"><div class="tag">24/07/2026</div><div class="d"><strong>Opus 5</strong><span>US$ 5/25 por millón de tokens.</span></div></div>
+  <div class="phase"><div class="tag">01/09/2026</div><div class="d"><strong>Fable 5.1</strong><span>Y Mythos 5.1; cache read a US$ 0,25.</span></div></div>
+  <div class="phase"><div class="tag">22/09/2026</div><div class="d"><strong>Opus 5.5</strong><span>US$ 4/20; el tema de esta página.</span></div></div>
+  <div class="phase"><div class="tag">Próximamente</div><div class="d"><strong>Sonnet 5.5 · Haiku 5.5</strong><span>"En las próximas semanas", según el anuncio.</span></div></div>
+</div></section>
+
+<section id="fontes"><div class="wrap">
+  <span class="chip">Metodología y fuentes</span>
+  <h2>De dónde salen los números</h2>
+  <p class="sub">Investigación realizada el 22/09/2026, día del lanzamiento: documentación oficial de Anthropic, cobertura de terceros y un inventario local de solo lectura. Cada gráfico usa una única tabla de origen. Los números autoinformados están marcados como tales.</p>
+  <h3 class="h">Oficiales (Anthropic)</h3>
+  <ol class="srcs">
+    <li>[A] Anuncio — <a href="https://www.anthropic.com/claude-opus-5-5">anthropic.com/claude-opus-5-5</a></li>
+    <li>[MP] Descripción del modelo — <a href="https://platform.claude.com/docs/en/models/opus-5-5/overview">platform.claude.com/…/opus-5-5/overview</a></li>
+    <li>[W] What's new — <a href="https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5">platform.claude.com/…/whats-new-opus-5-5</a></li>
+    <li>[MG] Guía de migración — <a href="https://platform.claude.com/docs/en/models/opus-5-5/migration-guide">platform.claude.com/…/opus-5-5/migration-guide</a></li>
+    <li>[MO] Descripción de los modelos — <a href="https://platform.claude.com/docs/en/about-claude/models/overview">platform.claude.com/…/models/overview</a></li>
+    <li>[PR] Precios — <a href="https://platform.claude.com/docs/en/about-claude/pricing">platform.claude.com/…/pricing</a></li>
+    <li>[RN] Release notes — <a href="https://platform.claude.com/docs/en/release-notes/overview">platform.claude.com/…/release-notes</a></li>
+    <li>[SC] System Card Opus 5.5 — <a href="https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf">PDF</a></li>
+    <li>[SC5] System Card Opus 5 — <a href="https://www-cdn.anthropic.com/c5fbac3f0b1280a933ebd26d3cb8bb9f5bdeaf48/Claude%20Opus%205%20System%20Card.pdf">PDF</a></li>
+  </ol>
+  <h3 class="h">Terceros</h3>
+  <ol class="srcs">
+    <li>Artificial Analysis — <a href="https://artificialanalysis.ai/models/releases/claude-opus-5-5">release</a> · <a href="https://artificialanalysis.ai/leaderboards/models">leaderboard</a></li>
+    <li>GitHub Changelog — <a href="https://github.blog/changelog/2026-09-22-claude-opus-5-5-is-now-available-in-github-copilot/">Opus 5.5 / Copilot</a></li>
+    <li>CodeRabbit — <a href="https://www.coderabbit.ai/blog/opus-5-5-model-review">"More catches, different misses"</a></li>
+    <li>OrcaRouter — <a href="https://www.orcarouter.ai/blog/claude-opus-5-5-vs-claude-opus-5">Opus 5.5 vs Opus 5</a></li>
+    <li>The Decoder — <a href="https://the-decoder.com/claude-opus-5-5-matches-fable-5-1-at-40-percent-lower-cost-as-anthropic-promises-to-fix-claudish-writing/">the-decoder.com</a></li>
+    <li><a href="https://www.macrumors.com/2026/09/22/anthropic-claude-opus-5-5/">MacRumors</a> · <a href="https://9to5mac.com/2026/09/22/anthropic-upgrades-claude-with-new-opus-5-5-model-details-here/">9to5Mac</a> · <a href="https://www.xda-developers.com/anthropic-releases-claude-opus-55-and-its-not-just-more-powerful-its-cheaper-too/">XDA</a> · <a href="https://www.thurrott.com/a-i/anthropic/341913/anthropic-releases-claude-opus-5-5">Thurrott</a></li>
+  </ol>
+</div></section>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">Claude Opus 5.5</div><div class="pill">Investigación + plan</div><div class="pill">PT · EN · ES</div>
+    <p style="margin-top:18px">Claude Opus 5.5 · investigación del 22/09/2026 ·
+      <a href="https://github.com/inematds/claude-opus55">inematds/claude-opus55</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='claude-opus55-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    try{ if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; } }catch(e){}
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      try{ localStorage.setItem(KEY, light?'light':'dark'); }catch(e){}
+    });
+  })();
+</script>
+<script>
+var LOCALE='es-ES', C={"ver_tabela": "Ver los datos en una tabla", "item": "Elemento", "col_usd": "US$/M", "col_idx": "Índice", "col_pts": "Apariciones", "p_out_t": "Precio de salida por millón de tokens", "p_out_s": "La salida concentra la mayor parte del costo de agentes y bots.", "p_cache_t": "Cache read por millón de tokens", "p_cache_s": "Opus 5.5 lee la caché al mismo precio que Sonnet 5.", "src_pr": "Fuente: precios oficiales de Anthropic [PR].", "b_t": "Opus 5.5 vs Opus 5 vs Fable 5.1 (system card)", "b_s": "Puntuación en %, effort max, promedio de 5 ejecuciones. Terminal-Bench en xhigh.", "b_src": "Fuente: System Card de Opus 5.5, Tabla 8.1.A [SC]. Autoinformado; varias pruebas ejecutadas por socios.", "hle": "HLE con tools", "aa_t": "Ranking independiente: Artificial Analysis Intelligence Index", "aa_s": "Índice agregado de 10 evaluaciones (tercero, no Anthropic). Consultado el 22/09/2026.", "aa_src": "Fuente: Artificial Analysis, leaderboard v4.3.2.", "inv_t": "Dónde aparece cada modelo en los proyectos de INEMA", "inv_s": "Apariciones en código y configuración (sin pruebas ni tablas de precios). Los 17 schedulers cuentan como opus-4-6 por el CLI antiguo.", "inv_src": "Fuente: inventario local de solo lectura, 22/09/2026.", "alias_opus": "alias opus (= 5.5)", "e_t": "Inteligencia × costo por tarea", "e_s": "Artificial Analysis Intelligence Index. Línea: Opus 5.5 en los cinco niveles de effort. Puntos: competidores con su mejor effort.", "e_leg1": "Opus 5.5 (low → max)", "e_leg2": "Otros modelos", "e_src": "Fuente: Artificial Analysis. Tercero, no Anthropic.", "e_x": "costo por tarea (US$)", "e_aria": "Índice de inteligencia por costo por tarea: Opus 5.5 en cinco niveles de effort y competidores", "e_col1": "Modelo / effort", "e_col3": "US$/tarea", "idx": "índice", "por_tarefa": "/tarea"};
+(function(){
+  var tip=document.getElementById('tip');
+  function showTip(e,h){tip.innerHTML=h;tip.style.opacity=1;moveTip(e);}
+  function moveTip(e){var x=e.clientX+14,y=e.clientY+14,w=tip.offsetWidth,h=tip.offsetHeight;
+    if(x+w>innerWidth-8)x=e.clientX-w-14; if(y+h>innerHeight-8)y=e.clientY-h-14; tip.style.left=x+'px';tip.style.top=y+'px';}
+  function hideTip(){tip.style.opacity=0;}
+  function fmt(v,d){return v.toLocaleString(LOCALE,{minimumFractionDigits:d||0,maximumFractionDigits:d||0});}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function bind(root,sel){root.querySelectorAll(sel).forEach(function(b){
+    b.addEventListener('mouseenter',function(e){showTip(e,b.getAttribute('data-t'));});
+    b.addEventListener('mousemove',moveTip); b.addEventListener('mouseleave',hideTip);});}
+  function dataTable(head,rows){
+    var h='<details class="data"><summary>'+esc(C.ver_tabela)+'</summary><div class="tblwrap"><table><thead><tr>'+head.map(function(x,i){return '<th'+(i?' class="n"':'')+'>'+esc(x)+'</th>';}).join('')+'</tr></thead><tbody>';
+    rows.forEach(function(r){h+='<tr>'+r.map(function(x,i){return '<td'+(i?' class="n"':'')+'>'+esc(x)+'</td>';}).join('')+'</tr>';});
+    return h+'</tbody></table></div></details>';
+  }
+  // barras horizontais: series [{name,color}], rows [{label, values[], hl}]
+  function hbar(id,o){
+    var el=document.getElementById(id), multi=o.series.length>1;
+    var h='<div class="ct">'+esc(o.title)+'</div><div class="cs">'+esc(o.sub)+'</div>';
+    if(multi) h+='<div class="legend">'+o.series.map(function(s){return '<span><i style="background:'+s.color+'"></i>'+esc(s.name)+'</span>';}).join('')+'</div>';
+    h+='<div class="hb'+(multi?'':' single')+'">';
+    o.rows.forEach(function(r){
+      h+='<div class="row"><div class="lab">'+(r.hl?'<b>'+esc(r.label)+'</b>':esc(r.label))+'</div><div class="bars">';
+      r.values.forEach(function(v,i){
+        var col=multi?o.series[i].color:(r.hl?'var(--s1)':'var(--neutral)');
+        var nm=multi?o.series[i].name+' · '+r.label:r.label;
+        h+='<div class="bar" data-t="'+esc(nm)+'<br><b>'+esc(o.fmt(v))+'</b>"><div class="fill" style="width:'+Math.max(0.4,v/o.max*86)+'%;background:'+col+'"></div><span class="val">'+esc(o.fmt(v))+'</span></div>';
+      });
+      h+='</div></div>';
+    });
+    h+='</div><p class="src">'+esc(o.src)+'</p>';
+    h+=dataTable([C.item].concat(multi?o.series.map(function(s){return s.name;}):[o.col]),o.rows.map(function(r){return [r.label].concat(r.values.map(o.fmt));}));
+    el.innerHTML=h; bind(el,'.bar[data-t]');
+  }
+  var usd=function(v){return 'US$ '+fmt(v,v<1?2:0);};
+  var num=function(v){return fmt(v);};
+  var pct=function(v){return fmt(v,1)+'%';};
+
+  hbar('c-preco-out',{title:C.p_out_t,sub:C.p_out_s,max:50,fmt:usd,col:C.col_usd,series:[{name:''}],src:C.src_pr,
+    rows:[{label:'Fable 5.1',values:[50]},{label:'Opus 5',values:[25]},{label:'Opus 4.8',values:[25]},{label:'Opus 5.5',values:[20],hl:true},{label:'Sonnet 5',values:[10]},{label:'Haiku 4.5',values:[5]}]});
+  hbar('c-preco-cache',{title:C.p_cache_t,sub:C.p_cache_s,max:0.5,fmt:function(v){return 'US$ '+fmt(v,2);},col:C.col_usd,series:[{name:''}],src:C.src_pr,
+    rows:[{label:'Opus 5',values:[0.5]},{label:'Opus 4.8',values:[0.5]},{label:'Fable 5.1',values:[0.25]},{label:'Opus 5.5',values:[0.2],hl:true},{label:'Sonnet 5',values:[0.2]},{label:'Haiku 4.5',values:[0.1]}]});
+  hbar('c-bench',{title:C.b_t,sub:C.b_s,max:100,fmt:pct,src:C.b_src,
+    series:[{name:'Opus 5.5',color:'var(--s1)'},{name:'Opus 5',color:'var(--s2)'},{name:'Fable 5.1',color:'var(--s3)'}],
+    rows:[
+      {label:'SWE-bench Pro',values:[89.9,79.2,81.2]},
+      {label:'SWE-bench Multilingual',values:[93.9,89.5,89.1]},
+      {label:'SWE-bench Multimodal',values:[61.4,59.4,54.7]},
+      {label:'Terminal-Bench 4.0',values:[66.4,52.3,55.8]},
+      {label:'Terminal-Bench-Science',values:[58.7,29.0,52.6]},
+      {label:'FrontierCode v1.1',values:[54.4,48.0,50.3]},
+      {label:C.hle,values:[67.7,63.6,65.6]},
+      {label:'OSWorld 2.0 (partial)',values:[81.8,74.0,80.7]},
+      {label:'HealthBench Professional',values:[65.6,59.8,62.1]},
+      {label:'AutomationBench',values:[40.0,26.9,31.4]}]});
+  hbar('c-aa',{title:C.aa_t,sub:C.aa_s,max:60,fmt:num,col:C.col_idx,series:[{name:''}],src:C.aa_src,
+    rows:[
+      {label:'Claude Opus 5.5 (max)',values:[58],hl:true},
+      {label:'Claude Opus 5.5 (high)',values:[54],hl:true},
+      {label:'Claude Fable 5.1 (max)',values:[53]},
+      {label:'GPT-6 Astra (max)',values:[53]},
+      {label:'Claude Opus 5.5 (medium)',values:[51],hl:true},
+      {label:'Claude Opus 5 (max)',values:[51]},
+      {label:'GPT-6 Sol (max)',values:[48]},
+      {label:'Muse Spark 1.3 (max)',values:[48]},
+      {label:'Grok 4.7 (xhigh)',values:[46]},
+      {label:'Gemini 3.8 Flash (high)',values:[41]},
+      {label:'Claude Sonnet 5 (max)',values:[38]}]});
+  hbar('c-inv',{title:C.inv_t,sub:C.inv_s,max:30,fmt:num,col:C.col_pts,series:[{name:''}],src:C.inv_src,
+    rows:[
+      {label:'alias sonnet',values:[27]},
+      {label:'claude-opus-4-6',values:[20]},
+      {label:'claude-opus-5',values:[12]},
+      {label:'claude-haiku-4-5',values:[8]},
+      {label:'claude-sonnet-4-6',values:[6]},
+      {label:'claude-opus-4-8',values:[5]},
+      {label:'claude-fable-5',values:[5]},
+      {label:'claude-sonnet-5',values:[4]},
+      {label:'claude-sonnet-4-5',values:[3]},
+      {label:C.alias_opus,values:[2],hl:true},
+      {label:'claude-opus-4-5',values:[1]},
+      {label:'claude-opus-5-5',values:[0],hl:true}]});
+
+  // dispersão effort × custo
+  (function(){
+    var el=document.getElementById('c-effort');
+    var line=[{e:'low',c:0.55,i:42},{e:'medium',c:1.34,i:51},{e:'high',c:1.82,i:54},{e:'xhigh',c:3.46,i:56},{e:'max',c:5.98,i:58}];
+    var others=[{n:'Fable 5.1 (max)',c:7.63,i:53},{n:'GPT-6 Astra (max)',c:3.26,i:53},{n:'Opus 5 (max)',c:5.86,i:51},{n:'GPT-6 Sol (max)',c:1.06,i:48},{n:'Sonnet 5 (max)',c:5.09,i:38}];
+    var W=640,H=320,L=44,R=16,T=14,B=38,xm=8,y0=35,y1=60;
+    function X(c){return L+(c/xm)*(W-L-R);} function Y(i){return T+(1-(i-y0)/(y1-y0))*(H-T-B);}
+    var s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="'+esc(C.e_aria)+'">';
+    [35,40,45,50,55,60].forEach(function(v){s+='<line class="axis" x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke-width="1"/><text x="'+(L-8)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+v+'</text>';});
+    [0,2,4,6,8].forEach(function(v){s+='<text x="'+X(v)+'" y="'+(H-B+18)+'" text-anchor="middle">US$ '+v+'</text>';});
+    s+='<text x="'+((L+W-R)/2)+'" y="'+(H-4)+'" text-anchor="middle">'+esc(C.e_x)+'</text>';
+    s+='<polyline fill="none" stroke="var(--s1)" stroke-width="2" points="'+line.map(function(p){return X(p.c)+','+Y(p.i);}).join(' ')+'"/>';
+    others.forEach(function(p){var edge=p.c>6.5;
+      s+='<circle class="pt" data-r="5" cx="'+X(p.c)+'" cy="'+Y(p.i)+'" r="5" fill="var(--s2)" stroke="var(--card)" stroke-width="2" data-t="'+esc(p.n)+'<br>'+esc(C.idx)+' <b>'+p.i+'</b> · US$ '+fmt(p.c,2)+esc(C.por_tarefa)+'"/>'
+        +'<text x="'+(X(p.c)+(edge?-8:8))+'" y="'+(Y(p.i)-7)+'"'+(edge?' text-anchor="end"':'')+'>'+esc(p.n)+'</text>';});
+    line.forEach(function(p){
+      s+='<circle class="pt" data-r="5.5" cx="'+X(p.c)+'" cy="'+Y(p.i)+'" r="5.5" fill="var(--s1)" stroke="var(--card)" stroke-width="2" data-t="Opus 5.5 ('+p.e+')<br>'+esc(C.idx)+' <b>'+p.i+'</b> · US$ '+fmt(p.c,2)+esc(C.por_tarefa)+'"/>'
+        +'<text x="'+(X(p.c)-7)+'" y="'+(Y(p.i)-9)+'" text-anchor="end">'+p.e+'</text>';});
+    s+='</svg>';
+    el.innerHTML='<div class="ct">'+esc(C.e_t)+'</div><div class="cs">'+esc(C.e_s)+'</div>'
+      +'<div class="legend"><span><i style="background:var(--s1)"></i>'+esc(C.e_leg1)+'</span><span><i style="background:var(--s2);border-radius:50%"></i>'+esc(C.e_leg2)+'</span></div>'
+      +s+'<p class="src">'+esc(C.e_src)+'</p>'
+      +dataTable([C.e_col1,C.idx,C.e_col3],line.map(function(p){return ['Opus 5.5 ('+p.e+')',p.i,fmt(p.c,2)];}).concat(others.map(function(p){return [p.n,p.i,fmt(p.c,2)];})));
+    el.querySelectorAll('.pt').forEach(function(c){
+      c.addEventListener('mouseenter',function(e){showTip(e,c.getAttribute('data-t'));c.setAttribute('r',8);});
+      c.addEventListener('mousemove',moveTip);
+      c.addEventListener('mouseleave',function(){hideTip();c.setAttribute('r',c.getAttribute('data-r'));});
+    });
+  })();
+})();
+
+</script>
+</body>
+</html>
