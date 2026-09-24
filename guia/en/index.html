@@ -265,6 +265,23 @@
     <li><b>More effort does not always pay off.</b> On FrontierCode, <code>medium</code> scores 54.6% and <code>max</code> 54.4%. On CursorBench, going from <code>medium</code> (52.5%, ~US$ 3 per task) to <code>max</code> (57.8%) gains about 5 points at a higher cost per task.</li>
     <li><b>At the same level, it thinks more per turn</b> than Opus 5, especially at <code>xhigh</code> and <code>max</code>. Leave headroom in <code>max_tokens</code> (64K is the suggested starting point for long agent turns).</li>
   </ul>
+  <h3 style="margin-top:34px">In practice: the same app at six levels</h3>
+  <p class="sub">Third-party test (2026-09-24): the same <code>/goal</code> in Claude Code at every level, turning ~105 GB of event recordings into an explorable 3D conference. One run per level, the author’s visual judgment, and cost estimated at API prices.</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Effort</th><th>Time</th><th>Cost (est.)</th><th>Tokens</th><th>Checks</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td><code>low</code></td><td>16m43s</td><td>US$ 3.91</td><td>191k</td><td>22</td><td>Works, but wrong branding and static videos</td></tr>
+      <tr><td><code>medium</code></td><td>1h13m</td><td>US$ 12.44</td><td>419k</td><td>23</td><td>The biggest quality jump</td></tr>
+      <tr><td><code>high</code></td><td>1h07m</td><td>US$ 16.31</td><td>~559k</td><td>22</td><td>More detail and storytelling</td></tr>
+      <tr class="hl"><td><code>xhigh</code></td><td>1h30m</td><td>US$ 25.92</td><td>~723k</td><td>34</td><td><b>Author’s pick</b></td></tr>
+      <tr><td><code>max</code></td><td>2h28m</td><td>US$ 50.38</td><td>1.18M</td><td>51</td><td>2× the cost of xhigh, with more bugs</td></tr>
+      <tr><td>ultracode</td><td>1h35m</td><td>US$ 18.69</td><td>?</td><td>42</td><td>Spawned no workflows; behaved like xhigh</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub">The GPT-6 Astra experiment with the same design reached the same pattern: the top level was not the preferred one, and there the winner was <code>medium</code>. Charts, the eight patterns and the data limits are in <a href="https://inematds.github.io/modelos/guia/en/esforco/">Effort in practice</a>.</p>
+  <div class="note" style="border-left-color:var(--amb)"><strong class="t">Nei’s take</strong>
+    <p>Running Opus 5.5 on <code>medium</code> is the best option for everyday work. Go up to <code>high</code> when you need more reasoning and keep <code>xhigh</code> for extreme cases. The same goes for GPT-6 Astra. <code>max</code> stays out. This is a recorded opinion, not a rule.</p>
+  </div>
 </div></section>
 
 <section id="api"><div class="wrap">
